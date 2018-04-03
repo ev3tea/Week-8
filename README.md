@@ -1,9 +1,8 @@
-# Week-8
-Week 8 Assignment
+# Week 8 Assignment
 
-## Vulnerability 1
+## Vulnerability #1
+Green Target displays if login exists in database with **bold**
 
-- Green Target displays if login exists in database with bold/normal
 ![Green existing](https://i.imgur.com/ZGnh7CT.png)
 ![Green nonexisting](https://i.imgur.com/9aE3yFF.png)
 
