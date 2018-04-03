@@ -13,3 +13,11 @@ Green Target displays if login exists in database with **bold**
 **Conclusion:** 
 
 We can brute force jmornoe's username by simply adding a digit to the back and Green target will inform us if certain login exists or not.
+
+## Vulnerability #2
+Blue, Red and Green Targets are affected by this exploit
+
+- Add A State to a Country with `<script>alert('Daulet found the XSS!');</script>` as name and position
+- Add Territory to the State with the same values
+
+![BlueRedGreen XSS](https://i.imgur.com/iqabtms.png)
