@@ -1,23 +1,54 @@
-# Week 8 Assignment
+# Project 8 - Pentesting Live Targets
 
-## Vulnerability #1
-Green Target displays if login exists in database with **bold**
+Time spent: **4** hours spent in total
 
-![Green existing](https://i.imgur.com/ZGnh7CT.png)
-![Green nonexisting](https://i.imgur.com/9aE3yFF.png)
+> Objective: Identify vulnerabilities in three different versions of the Globitek website: blue, green, and red.
 
-- Meanwhile, it doesn't happen to red or blue and they display both existing and nonexisting logins equally
-![Red existing](https://i.imgur.com/XIoHpKX.png)
-![Red nonexisting](https://i.imgur.com/WHO8ckL.png)
+The six possible exploits are:
+* Username Enumeration
+* Insecure Direct Object Reference (IDOR)
+* SQL Injection (SQLi)
+* Cross-Site Scripting (XSS)
+* Cross-Site Request Forgery (CSRF)
+* Session Hijacking/Fixation
 
-**Conclusion:** 
+Each version of the site has been given two of the six vulnerabilities. (In other words, all six of the exploits should be assignable to one of the sites.)
 
-We can brute force jmornoe's username by simply adding a digit to the back and Green target will inform us if certain login exists or not.
+## Blue
 
-## Vulnerability #2
-Blue, Red and Green Targets are affected by this exploit
+**Vulnerability #1:** SQL Injection (SQLi)
+![Inject this code instead of ID of a salesperson](./1.png)
+  ```
+  %27%20OR%20SLEEP(5)=0--%27
+  ```
+* Website will halt for five seconds because of our code
 
-- Add A State to a Country with `<script>alert('Daulet found the XSS!');</script>` as name and position
-- Add Territory to the State with the same values
+**Vulnerability #2:** Session Hijacking/Fixation
 
-![BlueRedGreen XSS](https://i.imgur.com/iqabtms.png)
+* Get victim's session ID from the hacktool
+![Session Hijacking 1](./2.png)
+* Open up the website on your side and direct yourself to /index.php (Make sure intercept is on)
+![Session Hijacking 2](./3.png)
+![Session Hijacking 3](./4.png)
+* Change Session ID value to one that we just stole
+![Session Hijacking 4](./5.png)
+* We are in
+![Session Hijacking 5](./6.png)
+
+## Green
+
+**Vulnerability #1:** Username Enumeration
+
+*I want to note that enumeration is not only way to tell if username exists. You can basically guess or use a username of the person from another website, as people try to get the same username on all the websites.*
+
+* Try jmonroeX as your login, where X is a number from 0 to infinity. [I used pperson, because I had this username in my db]
+* If username exists, the website will display it as **bold** text.
+![Enumeration](./7.png)
+![Enumeration](./8.png)
+
+**Vulnerability #2:** Cross-Site Scripting (XSS)
+
+- Send feedback with this code: `<script>alert('Daulet found the XSS!');</script>`
+- As soon as admin opens Feedback page, the XSS will be executed.
+
+![XSS](./9.png)
